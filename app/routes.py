@@ -4,6 +4,7 @@ from app.models.card import Card
 from app.models.board import Board
 
 cards_bp = Blueprint('cards_bp', __name__, url_prefix="/cards")
+# cards_bp = Blueprint('cards_bp', __name__, url_prefix="/boards/<board_id>/cards")
 boards_bp = Blueprint('boards_bp', __name__, url_prefix="/boards")
 
 # helper functions
@@ -40,7 +41,7 @@ def create_one_board():
     request_body = request.get_json()
 
     try:
-        new_board = Board(title = request_body["title"])
+        new_board = Board(title = request_body["title"],owner = request_body["owner"])
     except KeyError:
         return { "details": "Invalid data"}, 400
     db.session.add(new_board)
@@ -69,10 +70,6 @@ def get_one_board(board_id):
             "board": board.to_dict()
         }
     ), 200
-
-# POST /boards
-# ?????
-# @boards_bp.route('/<board_id>', methods=['POST'])
 
 # POST /boards/<board_id>/cards
 @boards_bp.route('/<board_id>/cards', methods=['POST'])
