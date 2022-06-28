@@ -54,4 +54,4 @@ If the `create_app` function in `app/__init__.py` is renamed or moved, the conte
 | `GET`  | `/boards/<board_id>/cards`  | None  | Retrieves a list of cards under one specific board   |
 | `POST`  | `/boards/<board_id>/cards`  | `{ message: 'messageText', likes_count: likesCount, board_id: boardID }` | Creates a new card   |
 | `DELETE`  | `/boards/<board_id>/cards/<card_id>`  | None  | Deletes a card |
-| `PATCH`  | `/boards/<board_id>/cards/<card_id>/like`  | `{likes_count: likesCount }`  | Updates the like counts of a card |
+| `PATCH`  | `/boards/<board_id>/cards/<card_id>/like`  | `{ likes_count: likesCount }`  | Updates the like counts of a card |
