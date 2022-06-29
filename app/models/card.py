@@ -7,9 +7,6 @@ class Card (db.Model):
     board_id = db.Column(db.Integer, db.ForeignKey("board.board_id"))
     board = db.relationship("Board", back_populates="cards", lazy=True)
 
-    # def likes_count(self):
-    #     return self.completed_at is not None
-
     def to_dict(self):
         return {
             "card_id": self.card_id,

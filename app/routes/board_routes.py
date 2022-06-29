@@ -2,9 +2,10 @@ from flask import Blueprint, request, jsonify
 from app import db
 from app.models.board import Board
 from app.helper import get_board_or_abort
-#from app.routes.card_routes import cards_bp
+
 
 boards_bp = Blueprint('boards_bp', __name__, url_prefix="/boards")
+
 
 @boards_bp.route("", methods=['POST'])
 def create_one_board():
@@ -22,6 +23,7 @@ def create_one_board():
         }
     ),201
 
+
 @boards_bp.route("", methods=['GET'])
 def get_all_boards():
     boards = Board.query.all()
@@ -31,10 +33,10 @@ def get_all_boards():
 
     return jsonify(boards_response), 200
 
+
 # GET /boards
 @boards_bp.route('/<board_id>', methods=['GET'])
 def get_one_board(board_id):
     board = get_board_or_abort(board_id)
-   # cards = []
 
     return jsonify(board.to_dict()), 200

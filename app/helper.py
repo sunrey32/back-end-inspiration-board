@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, make_response, abort
 from app.models.card import Card
 from app.models.board import Board
 
+
 # Helper functions
 def get_card_or_abort(card_id):
     try:
@@ -14,7 +15,9 @@ def get_card_or_abort(card_id):
     if card is None:
         rsp = {"msg":f"Could not find card with id {card_id}"}
         abort(make_response(jsonify(rsp), 404))
+
     return card
+
 
 def get_board_or_abort(board_id):
     try:
@@ -27,6 +30,7 @@ def get_board_or_abort(board_id):
     if board is None:
         rsp = {"msg":f"Could not find board with id {board_id}"}
         abort(make_response(jsonify(rsp), 404))
+
     return board
 
 
