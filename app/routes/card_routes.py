@@ -56,11 +56,15 @@ def add_cards_to_boards(board_id):
 @boards_bp.route('/<board_id>/cards', methods=['GET'])
 def get_cards_at_one_board(board_id):
     board = get_board_or_abort(board_id)
-    cards = [] #refactor?
+    cards = []
     for card in board.cards:
         cards.append(card.to_dict())
-
-    return jsonify(cards), 200
+    return ({
+                "board_id": board.board_id,
+                "title": board.title,
+                "owner": board.owner,
+                "cards": cards
+            }), 200
 
 
 # GET one card
@@ -69,6 +73,8 @@ def get_one_card_at_one_board(board_id, card_id):
     card = get_card_or_abort(card_id)
 
     return jsonify(card.to_dict()), 200
+
+
 
 
 # DELETE /boards/<board_id>/cards

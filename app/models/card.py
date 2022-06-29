@@ -11,17 +11,9 @@ class Card (db.Model):
     #     return self.completed_at is not None
 
     def to_dict(self):
-
-        if self.card_id is None:
-            return {
-                "message": self.message,
-                "likes_count": self.likes_count,
-                "board_id": self.board_id
+        return {
+            "card_id": self.card_id,
+            "message": self.message,
+            "likes_count": self.likes_count,
+            "board_id": self.board_id
         }
-        else:
-            return {
-                "card_id": self.card_id,
-                "message": self.message,
-                "likes_count": self.likes_count,
-                "board_id": self.board_id
-            }

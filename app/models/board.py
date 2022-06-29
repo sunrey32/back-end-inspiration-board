@@ -7,14 +7,7 @@ class Board (db.Model):
     cards = db.relationship("Card", back_populates="board", lazy=True)
 
     def to_dict(self):
-        if self.board_id is None:
-            return {
-                "title": self.title,
-                "owner": self.owner
-            }
-
-        else:
-            return {
+        return {
                 "board_id": self.board_id,
                 "title": self.title,
                 "owner": self.owner
