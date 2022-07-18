@@ -42,7 +42,7 @@ def validate_card(request_body, board_id):
     if message and len(message) <= 40:
         new_card = Card(message=message, likes_count=0, board_id=board_id)
         return new_card
-    elif len(message) > 40: #refactor error msg
+    elif str(len(message)) > 40: #refactor error msg // 06/29 Vera change to str
         rsp = {
             "details": "Please enter a message shorter than 40 characters. "
         }
