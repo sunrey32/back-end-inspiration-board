@@ -57,3 +57,4 @@ If the `create_app` function in `app/__init__.py` is renamed or moved, the conte
 | `POST`  | `/boards/<board_id>/cards`  | `{ "message": "messageText" }` | `{  "board_id": boardId, "card_id": cardId, "likes_count": likesCount, "message": "messageText" }` | Creates a new card   |
 | `DELETE`  | `/<card_id>'`  | None | `{ "details": "Card {cardId} {messageText} successfully deleted" }` | Deletes a card |
 | `PATCH`  | `/<card_id>/like`  | None | `{ "board_id": boardId, "card_id": cardId, "likes_count": likesCount, "message": "messageText" }` | Updates the like counts of a card by 1|
+| `DELETE`  | `/<board_id>'`  | None | `{ "details": "Board {board_id} {board.title} successfully deleted" }` | Deletes a board |

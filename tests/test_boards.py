@@ -146,7 +146,6 @@ def test_create_board(client):
             "board_id": 1,
             "owner": "New Owner",
             "title": "My New Board"
-
         }
     }
 
@@ -162,3 +161,62 @@ def test_create_board_missing_title(client):
     assert response_body == {
         "details": "Invalid data"
     }
+
+# testing for delete one board
+
+def test_delete_board(client, one_board):
+    # Act
+    response = client.delete("/boards/1")
+    response_body = response.get_json()
+
+    # Assert
+    assert response.status_code == 200
+    assert "details" in response_body
+    assert response_body == {
+        "details": 'Board 1 "How to write a joke" successfully deleted'
+    }
+    assert Board.query.get(1) == None
+
+    # Check that the board was deleted
+    # Act
+    response = client.get("/boards/1")
+    response_body = response.get_json()
+    # Assert
+    assert response.status_code == 404
+    assert "msg" in response_body
+    assert response_body ==  {"msg": "Could not find board with id 1"}
+
+def test_delete_board_not_found_with_empty_db(client):
+
+    # Act
+    response = client.delete("/boards/1")
+    response_body = response.get_json()
+
+    # Assert
+    assert response.status_code == 404
+    assert "msg" in response_body
+    assert response_body ==  {"msg": "Could not find board with id 1"}
+    assert Board.query.all() == []
+
+
+def test_delete_board_not_found_with_id_with_populated_db(client, one_board):
+    # Act
+    response = client.delete("/boards/12121")
+    response_body = response.get_json()
+
+    # Assert
+    assert response.status_code == 404
+    assert "msg" in response_body
+    assert response_body ==  {"msg": "Could not find board with id 12121"}
+
+
+def test_delete_goal_not_found_invalid_id_with_populated_db(client, one_board):
+    # Act
+    response = client.delete("/boards/bad_board")
+    response_body = response.get_json()
+
+    # Assert
+    assert response.status_code == 400
+    assert "msg" in response_body
+    assert response_body ==  {"msg": "Invalid id bad_board"}
+    
