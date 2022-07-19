@@ -55,20 +55,3 @@ def delete_one_board(board_id):
     return {
         "details": f'Board {board.board_id} "{board.title}" successfully deleted'
     }, 200
-
-# DELETE /boards
-@boards_bp.route("", methods=['DELETE'])
-def delete_all_boards():
-    
-    board = Board.query.all()
-
-    # try:
-    #     board = Board.query.all()
-    # except KeyError:
-    #     return { "details": "Boards not exist, cant delete twicely"}, 400
-    db.session.delete(board)
-    db.session.commit()
-
-    return {
-        "details": f'All boards successfully deleted'
-    }, 200
