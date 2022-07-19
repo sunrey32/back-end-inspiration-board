@@ -28,7 +28,24 @@ def client(app):
 # This fixture creates a board and saves it in the database
 @pytest.fixture
 def one_board(app):
-    new_board = Board(
-        owner="Lulu", title="How to write a joke")
+    new_board = Board(owner="Lulu", title="How to write a joke")
     db.session.add(new_board)
+    db.session.commit()
+
+
+# This fixture gets called in every test that
+# references "four_board"
+# This fixture creates a board and saves it in the database
+@pytest.fixture
+def four_board(app):
+    db.session.add_all([
+        Board(
+            owner="First", title="Title 1"),
+        Board(
+            owner="Second", title="Title 2"),
+        Board(
+            owner="Third", title="Title 3"),
+        Board(
+            owner="Fourth", title="Title 4")
+    ])
     db.session.commit()

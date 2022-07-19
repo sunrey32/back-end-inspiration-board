@@ -38,5 +38,9 @@ def get_all_boards():
 @boards_bp.route('/<board_id>', methods=['GET'])
 def get_one_board(board_id):
     board = get_board_or_abort(board_id)
-
-    return jsonify(board.to_dict()), 200
+    # return jsonify(board.to_dict()), 200
+    return jsonify(
+        {
+            "board": board.to_dict()
+        }
+    ), 200
