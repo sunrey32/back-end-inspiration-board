@@ -43,7 +43,7 @@ def validate_card(request_body, board_id):
             "details": "Please enter a message. "
         }
         abort(make_response(jsonify(rsp), 400))
-    elif len(request_body["message"]) > 40: #refactor error msg // 06/29 Vera change to str
+    elif len(request_body["message"]) > 40: 
         rsp = {
             "details": "Please enter a message shorter than 40 characters. "
         }
